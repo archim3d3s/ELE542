@@ -13,8 +13,9 @@
 #define ACTIF		  7
 
 /* 		  MACROS	   	  */
-#define LED_ON(state) {PORTB &= ~(1<<state)}
-#define LED_ON(state) {PORTB |=  (1<<state)}
+#define LED_ON(state)  {PORTB &= ~(1<<state)}
+
+#define LED_OFF(state) {PORTB |=  (1<<state)}
 /* 		 FUNCTIONS		  */
 void initLED(void);
 
