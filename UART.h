@@ -1,19 +1,18 @@
-#ifndef UART_H
-#define UART_H
-
-/* set baud rate here */
-#define UART_BAUD_RATE 9600
-/* automatically calcuate baud register value */
-#define UART_BAUD_SELECT (F_CPU/(UART_BAUD_RATE*16l)-1)
-
-/* Commands*/
-#define NORMAL        0xF1
-#define FORCE_STOP    0xF0
-
-volatile uint8_t UARTbyteCounter;
-volatile uint8_t commandPacket[3];
 
 
-void UARTinit(void);
 
-#endif
+
+#include "Common.h"
+
+/* fonction pour encoyer sur le uart */
+//void uart_send(u08 *buf, u08 size);
+
+
+/* fonction pour encoyer sur le uart les streams de debug voulu */
+void debug_send(u08 *buf, u08 size);
+
+
+void uart_init(void);
+
+/* contient les 3 données importantes déclaration global*/
+extern volatile int commande[3];
