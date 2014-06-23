@@ -1,7 +1,3 @@
-
-
-
-
 #include "Common.h"
 
 /* fonction pour encoyer sur le uart */

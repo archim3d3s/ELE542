@@ -1,24 +1,3 @@
-/*
-    Title:    AVR-GCC test program #4 for the STK200 eva board
-    Author:   Volker Oth
-    Date:     4/1999
-    Purpose:  Uses the UART to communicate with a terminal program on the pc.
-              The "tranceive complete" interrupt is used to send the string 
-              "Serial Data from AVR receiced###" continuously to the pc.
-              When a byte was received from the pc, the "receive complete"
-              interrupt is called, which outputs the byte to PortB where the
-              LEDs visualize the 8 bits it consists of.
-              UART format: 9600 baud, 8bit, 1 stopbit, no parity
-    needed
-    Software: AVR-GCC to compile
-    needed
-    Hardware: ATS90S8515/8535/2313/mega(?) on STK200/300 board
-    Note:     To contact me, mail to
-                  volkeroth@gmx.de
-              You might find more AVR related stuff at my homepage:
-                  http://members.xoom.com/volkeroth
-*/
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "Common.h"
@@ -36,8 +15,6 @@
 
 #define UART_BAUD_SELECT (F_CPU/(UART_BAUD_RATE*16l)-1)
 
-
-
 /* uart globals */
 static volatile u08 *uart_data_ptr;
 static volatile u08 uart_counter;
@@ -46,7 +23,7 @@ volatile int echo_en = 0;
 volatile int trans_flag = 0;
 volatile int commande[3];
 
-SIGNAL(SIG_UART_TRANS)      
+ISR(USART_TXC_vect)      
 /* signal handler for uart txd ready interrupt */
 {
 	if (uart_counter)
@@ -66,22 +43,13 @@ SIGNAL(SIG_UART_TRANS)
 	}
 }
 
-
-
-
-
-
-SIGNAL(SIG_UART_RECV)      
+ISR(USART_RXC_vect)      
 /* signal handler for receive complete interrupt */
 {
-    
-	
 	char data =0;
-
 	data = UDR;
 
-
-/* vérification de la reception de commande et écriture*/
+	/* vérification de la reception de commande et écriture*/
 	if( i == 0  &&(data == 0xF1 || data == 0xF0))
 	{	
  		commande[i] = data;
@@ -108,21 +76,6 @@ SIGNAL(SIG_UART_RECV)
 	}
 }
 
-
-/* fonction du gtctest4
-
-void uart_send(u08 *buf, u08 size)
-send buffer <buf> to uart 
-{   
-    if (uart_counter == 0) {
-         //write first byte to data buffer 
-        uart_data_ptr  = buf;
-        uart_counter   = size;
-        outp(*buf, UDR);
-    }
-}
-*/
-
 void debug_send(u08 *buf, u08 size)
 /* send buffer <buf> to uart */
 {   
@@ -140,7 +93,6 @@ void debug_send(u08 *buf, u08 size)
 	}
 }
 
-
 void uart_init(void)
 /* initialize uart */
 {
@@ -152,5 +104,3 @@ void uart_init(void)
     outp((u08)(UART_BAUD_SELECT >> 8), UBRRH);          
     outp((u08)(UART_BAUD_SELECT & 0x00FF), UBRRL);          
 }
-
-
