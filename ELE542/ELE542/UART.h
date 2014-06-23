@@ -1,14 +1,22 @@
-#include "Common.h"
+#ifndef UART_H
+#define UART_H
 
-/* fonction pour encoyer sur le uart */
-//void uart_send(u08 *buf, u08 size);
+#include "main.h"
+#include <util/atomic.h>
 
+#define UART_BAUD_RATE   9600    
+#define UART_BAUD_SELECT (F_CPU/(UART_BAUD_RATE*16l)-1)
 
-/* fonction pour encoyer sur le uart les streams de debug voulu */
-void debug_send(u08 *buf, u08 size);
+/* uart globals */
+static volatile uint8_t *uart_data_ptr;
+static volatile uint8_t uart_counter;
 
+void debug_send(uint8_t *buf, uint8_t size);
+void initUART(void);
 
-void uart_init(void);
-
-/* contient les 3 données importantes déclaration global*/
 extern volatile int commande[3];
+
+static volatile uint8_t flag_CMD_in = 0;
+
+
+#endif

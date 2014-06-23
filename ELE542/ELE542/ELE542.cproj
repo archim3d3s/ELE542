@@ -99,9 +99,6 @@
     <Compile Include="ADC.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Common.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="LED.c">
       <SubType>compile</SubType>
     </Compile>
@@ -112,6 +109,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="moteur.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="moteur.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="PWM.c">

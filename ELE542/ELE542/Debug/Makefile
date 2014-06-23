@@ -39,6 +39,7 @@ C_SRCS +=  \
 ../ADC.c \
 ../LED.c \
 ../main.c \
+../moteur.c \
 ../PWM.c \
 ../UART.c
 
@@ -53,6 +54,7 @@ OBJS +=  \
 ADC.o \
 LED.o \
 main.o \
+moteur.o \
 PWM.o \
 UART.o
 
@@ -60,6 +62,7 @@ OBJS_AS_ARGS +=  \
 ADC.o \
 LED.o \
 main.o \
+moteur.o \
 PWM.o \
 UART.o
 
@@ -67,6 +70,7 @@ C_DEPS +=  \
 ADC.d \
 LED.d \
 main.d \
+moteur.d \
 PWM.d \
 UART.d
 
@@ -74,6 +78,7 @@ C_DEPS_AS_ARGS +=  \
 ADC.d \
 LED.d \
 main.d \
+moteur.d \
 PWM.d \
 UART.d
 
@@ -88,6 +93,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

@@ -1,28 +1,46 @@
-
-
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include "uart.h"
-#include "Common.h"
-#include <stdio.h>
-
-extern volatile int commande[3];
+#include "main.h"
 
 int main(void)
 {
-	u08 debugString[5]= {0};
+	//INITIALISATION
+    initUART();
+	initTIMER();
+	initLED();
+	//initTWI();
 
-    DDRB = 0xff;      /* PortB output */
-    PORTB = 0x00;     /* switch LEDs on */
-
-    uart_init();
-    sei();                 /* enable interrupts */
-
-	sprintf((char*) debugString,"%d%d%d",  (char) commande[0], (char) commande[1], (char) commande[2]);
-	debug_send(debugString, 3);
+    sei();   /* enable interrupts */
 	
-    for (;;) /* loop forever */
+	//ROUTINE PRINCIPALE	
+    while(1)
 	{ 
+		//Reception commande
+		if(flag_CMD_in)
+		{
+			//Convertir la trame en commande pour les moteurs
+		}
 		
+		if(flag_50ms_TICK)
+		{
+			//Demarrer PING sur un sonar
+			//Recuperer mesure sur l'autre sonar
+			//Alterner entre sonar gauche et droit
+		}
+		
+		//if(flag_obstacle)
+		//{
+			//Changer le comportement du robot pour eviter la collision 
+		//}
+		
+		if(flag_PWMcycle)
+		{
+			//Convertir valeur de l'ADC en valeur de vitesse
+			//Calculer nouvelles valeurs de PWM
+			//Mettre a jour les PWM et bits de direction
+		}
+		
+		if (flag_newStatus)
+		{
+			//Afficher le nouveau statut sur les LED
+		}
     }            
 }

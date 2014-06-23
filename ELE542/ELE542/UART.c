@@ -1,23 +1,5 @@
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include "Common.h"
 #include "uart.h"
-#include <util/atomic.h>
 
-#define outp(val,port) port = val
-#define inp(port) port
-
-#ifndef F_CPU
-#define F_CPU            16000000UL      /* C    rystal 16.000 Mhz */
-#endif
-#define UART_BAUD_RATE      9600      /* 9600 baud */
-
-
-#define UART_BAUD_SELECT (F_CPU/(UART_BAUD_RATE*16l)-1)
-
-/* uart globals */
-static volatile u08 *uart_data_ptr;
-static volatile u08 uart_counter;
 volatile int i = 0;
 volatile int echo_en = 0;
 volatile int trans_flag = 0;
@@ -76,7 +58,7 @@ ISR(USART_RXC_vect)
 	}
 }
 
-void debug_send(u08 *buf, u08 size)
+void debug_send(uint8_t *buf, uint8_t size)
 /* send buffer <buf> to uart */
 {   
      echo_en =0	;
@@ -93,14 +75,13 @@ void debug_send(u08 *buf, u08 size)
 	}
 }
 
-void uart_init(void)
-/* initialize uart */
+void initUART(void)
 {
     /* configure asynchronous operation, no parity, 1 stop bit, 8 data bits, Tx on rising edge */
-    outp((1<<URSEL)|(0<<UMSEL)|(0<<UPM1)|(0<<UPM0)|(0<<USBS)|(1<<UCSZ1)|(1<<UCSZ0)|(0<<UCPOL),UCSRC);       
+    UCSRC = (1<<URSEL)|(0<<UMSEL)|(0<<UPM1)|(0<<UPM0)|(0<<USBS)|(1<<UCSZ1)|(1<<UCSZ0)|(0<<UCPOL);   
     /* enable RxD/TxD and ints */
-    outp((1<<RXCIE)|(1<<TXCIE)|(1<<RXEN)|(1<<TXEN)|(0<<UCSZ2),UCSRB);       
+    UCSRB = (1<<RXCIE)|(1<<TXCIE)|(1<<RXEN)|(1<<TXEN)|(0<<UCSZ2);       
     /* set baud rate */
-    outp((u08)(UART_BAUD_SELECT >> 8), UBRRH);          
-    outp((u08)(UART_BAUD_SELECT & 0x00FF), UBRRL);          
+    UBRRH = (uint8_t)(UART_BAUD_SELECT >> 8);         
+    UBRRL = (uint8_t)(UART_BAUD_SELECT & 0x00FF);          
 }
