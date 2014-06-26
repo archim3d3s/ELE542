@@ -3,43 +3,51 @@
 
 #include "main.h"
 
-//Defines for controlling right engine h-bridge
-#define RIGHT_ENGINE_MASK		(1<<MOTEUR_DROIT_DIR1)|(1<<MOTEUR_DROIT_DIR2)
-#define RIGHT_FOWARD			PORTD = (PORTD & ~(RIGHT_ENGINE_MASK))|(1<<MOTEUR_DROIT_DIR1)|(0<<MOTEUR_DROIT_DIR2)
-#define	RIGHT_REVERSE			PORTD = (PORTD & ~(RIGHT_ENGINE_MASK))|(0<<MOTEUR_DROIT_DIR1)|(1<<MOTEUR_DROIT_DIR2)
-#define RIGHT_NEUTRAL			PORTD = (PORTD & ~(RIGHT_ENGINE_MASK))|(0<<MOTEUR_DROIT_DIR1)|(0<<MOTEUR_DROIT_DIR2)
-#define RIGHT_BRAKE				PORTD = (PORTD & ~(RIGHT_ENGINE_MASK))|(1<<MOTEUR_DROIT_DIR1)|(1<<MOTEUR_DROIT_DIR2)
-//Defines for controlling right engine h-bridge
-#define LEFT_ENGINE_MASK		(1<<MOTEUR_GAUCHE_DIR1)|(1<<MOTEUR_GAUCHE_DIR2)
-#define LEFT_FOWARD				PORTD = (PORTD & ~(LEFT_ENGINE_MASK))|(1<<MOTEUR_GAUCHE_DIR1)|(0<<MOTEUR_GAUCHE_DIR2)
-#define LEFT_REVERSE			PORTD = (PORTD & ~(LEFT_ENGINE_MASK))|(0<<MOTEUR_GAUCHE_DIR1)|(1<<MOTEUR_GAUCHE_DIR2)
-#define LEFT_NEUTRAL			PORTD = (PORTD & ~(LEFT_ENGINE_MASK))|(0<<MOTEUR_GAUCHE_DIR1)|(0<<MOTEUR_GAUCHE_DIR2)
-#define LEFT_BRAKE				PORTD = (PORTD & ~(LEFT_ENGINE_MASK))|(1<<MOTEUR_GAUCHE_DIR1)|(1<<MOTEUR_GAUCHE_DIR2)
-//Defines for controlling calibration
-#define MOTEUR_CALIB			4
-#define CALIBRATION_MASK		(1<<MOTEUR_CALIB)
-#define SET_CALIBRATION			PORTA = (PORTA & ~(CALIBRATION_MASK))|(1<<MOTEUR_CALIB)
-#define CLR_CALIBRATION			PORTA = (PORTA & ~(CALIBRATION_MASK))|(0<<MOTEUR_CALIB)
+//MACROS
+//Control of Calibration bit
+#define CAL_bit_ON()	(PORTA |= (1<<PA4))
+#define CAL_bit_OFF()	(PORTA &= ~(1<<PA4))
 
-//Defines for ADC mux switching
-#define	SWITCH_MUX_CHANNEL_0	ADMUX &= ~(1<<MUX0)
-#define SWITCH_MUX_CHANNEL_1	ADMUX |= (1<<MUX0)
+//ADC mux switching
+#define	SWITCH_ADC_CHANNEL_0	ADMUX &= ~(1<<MUX0)
+#define SWITCH_ADC_CHANNEL_1	ADMUX |= (1<<MUX0)
 
-//Define for adc sign reading
-#define RIGHT_DIR_SIGN		PINA&0b00001000		//bit 3
-#define LEFT_DIR_SIGN		PINA&0b00000100		//bit 2
+//     Bits de direction
+// DIR2	DIR1 Sens de rotation
+//  0    0		 Neutre
+//  0    1	   Marche avant
+//  1    0	  Marche arriere
+//  1    1       Freins
+//Control of direction bits
+#define RIGHT_DIR1			(PD6)
+#define RIGHT_DIR2			(PD7)
+#define LEFT_DIR1			(PD2)
+#define LEFT_DIR2			(PD3)
+
+void DIR_bit_ON (uint8_t direction);
+void DIR_bit_OFF(uint8_t direction);
 
 /* ADC globals */
-static volatile uint8_t 	LEFT_counter = 0;	//left engine adc sample counter variable
-static volatile uint16_t	LEFT_ADCvalue = 0;
-static volatile uint8_t 	RIGHT_counter = 0;	//right engine adc sample counter variable
+static volatile uint8_t 	LEFT_counter   = 0;
+static volatile uint16_t	LEFT_ADCvalue  = 0;
+static volatile uint8_t 	RIGHT_counter  = 0;
 static volatile uint16_t	RIGHT_ADCvalue = 0;
 
-//Calibration arrays
-static volatile uint16_t	right_cal[4] = {0,0,1023,1023};
-static volatile uint16_t	left_cal[4]= {0,0,1023,1023};
+//Calibration
+#define CALIB_SAMPLE_NB		25
+//Right
+static volatile uint16_t	RIGHT_Vmax_pos = 0xFFFF;
+static volatile uint16_t	RIGHT_Vzero_pos = 0x0000;
+static volatile uint16_t	RIGHT_Vmax_neg = 0xFFFF;
+static volatile uint16_t	RIGHT_zero_neg = 0x0000;
+//Left
+static volatile uint16_t	LEFT_Vmax_pos = 0xFFFF;
+static volatile uint16_t	LEFT_Vzero_pos = 0x0000;
+static volatile uint16_t	LEFT_Vmax_neg = 0xFFFF;
+static volatile uint16_t	LEFT_Vzero_neg = 0x0000;
 
 void ADC_init(void);
-void ADC_calibration(void);
+void motor_calibration(void);
+void resetADC(void);
 
 #endif

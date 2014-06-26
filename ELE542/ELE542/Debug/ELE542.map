@@ -30,6 +30,8 @@ e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/.
                               moteur.o (__mulsf3)
 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
                               e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(mulsf3.o) (__mulsf3x)
+e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+                              ADC.o (__udivmodhi4)
 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
                               e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32.o (exit)
 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_copy_data.o)
@@ -37,29 +39,49 @@ e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/.
 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
                               ADC.o (__do_clear_bss)
 
-Allocating common symbols
-Common symbol       size              file
-
-commande            0x6               UART.o
-
 Discarded input sections
 
  .bss           0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32.o
  .text          0x00000000        0x0 ADC.o
  .bss           0x00000000        0x0 ADC.o
+ .text.DIR_bit_ON
+                0x00000000       0x1a ADC.o
+ .text.DIR_bit_OFF
+                0x00000000       0x18 ADC.o
  .text.ADC_init
-                0x00000000        0xc ADC.o
- .text.ADC_calibration
+                0x00000000       0x14 ADC.o
+ .text.resetADC
+                0x00000000       0x1e ADC.o
+ .text.motor_calibration
+                0x00000000      0x12c ADC.o
+ .bss.LEFT_Vzero_neg
                 0x00000000        0x2 ADC.o
- .data.left_cal
-                0x00000000        0x8 ADC.o
- .data.right_cal
-                0x00000000        0x8 ADC.o
+ .data.LEFT_Vmax_neg
+                0x00000000        0x2 ADC.o
+ .bss.LEFT_Vzero_pos
+                0x00000000        0x2 ADC.o
+ .data.LEFT_Vmax_pos
+                0x00000000        0x2 ADC.o
+ .bss.RIGHT_zero_neg
+                0x00000000        0x2 ADC.o
+ .data.RIGHT_Vmax_neg
+                0x00000000        0x2 ADC.o
+ .bss.RIGHT_Vzero_pos
+                0x00000000        0x2 ADC.o
+ .data.RIGHT_Vmax_pos
+                0x00000000        0x2 ADC.o
  .bss.flag_newStatus
+                0x00000000        0x1 ADC.o
+ .bss.flag_trans_ON
+                0x00000000        0x1 ADC.o
+ .data.flag_echo_EN
                 0x00000000        0x1 ADC.o
  .bss.flag_CMD_in
                 0x00000000        0x1 ADC.o
- .bss.uart_counter
+ .bss.commande  0x00000000        0x3 ADC.o
+ .bss.uart_in_counter
+                0x00000000        0x1 ADC.o
+ .bss.uart_out_counter
                 0x00000000        0x1 ADC.o
  .bss.TICK_counter
                 0x00000000        0x1 ADC.o
@@ -67,15 +89,22 @@ Discarded input sections
                 0x00000000        0x1 ADC.o
  .bss.flag_PWMcycle
                 0x00000000        0x1 ADC.o
- .bss.DIR2      0x00000000        0x1 ADC.o
- .bss.DIR1      0x00000000        0x1 ADC.o
  .text          0x00000000        0x0 LED.o
  .bss           0x00000000        0x0 LED.o
+ .text.LED_ON   0x00000000       0x18 LED.o
+ .text.LED_OFF  0x00000000       0x1a LED.o
  .bss.flag_newStatus
+                0x00000000        0x1 LED.o
+ .bss.flag_trans_ON
+                0x00000000        0x1 LED.o
+ .data.flag_echo_EN
                 0x00000000        0x1 LED.o
  .bss.flag_CMD_in
                 0x00000000        0x1 LED.o
- .bss.uart_counter
+ .bss.commande  0x00000000        0x3 LED.o
+ .bss.uart_in_counter
+                0x00000000        0x1 LED.o
+ .bss.uart_out_counter
                 0x00000000        0x1 LED.o
  .bss.TICK_counter
                 0x00000000        0x1 LED.o
@@ -83,12 +112,22 @@ Discarded input sections
                 0x00000000        0x1 LED.o
  .bss.flag_PWMcycle
                 0x00000000        0x1 LED.o
- .bss.DIR2      0x00000000        0x1 LED.o
- .bss.DIR1      0x00000000        0x1 LED.o
- .data.left_cal
-                0x00000000        0x8 LED.o
- .data.right_cal
-                0x00000000        0x8 LED.o
+ .bss.LEFT_Vzero_neg
+                0x00000000        0x2 LED.o
+ .data.LEFT_Vmax_neg
+                0x00000000        0x2 LED.o
+ .bss.LEFT_Vzero_pos
+                0x00000000        0x2 LED.o
+ .data.LEFT_Vmax_pos
+                0x00000000        0x2 LED.o
+ .bss.RIGHT_zero_neg
+                0x00000000        0x2 LED.o
+ .data.RIGHT_Vmax_neg
+                0x00000000        0x2 LED.o
+ .bss.RIGHT_Vzero_pos
+                0x00000000        0x2 LED.o
+ .data.RIGHT_Vmax_pos
+                0x00000000        0x2 LED.o
  .bss.RIGHT_ADCvalue
                 0x00000000        0x2 LED.o
  .bss.RIGHT_counter
@@ -99,16 +138,33 @@ Discarded input sections
                 0x00000000        0x1 LED.o
  .text          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .bss.uart_counter
+ .bss.flag_trans_ON
+                0x00000000        0x1 main.o
+ .data.flag_echo_EN
+                0x00000000        0x1 main.o
+ .bss.commande  0x00000000        0x3 main.o
+ .bss.uart_in_counter
+                0x00000000        0x1 main.o
+ .bss.uart_out_counter
                 0x00000000        0x1 main.o
  .bss.TICK_counter
                 0x00000000        0x1 main.o
- .bss.DIR2      0x00000000        0x1 main.o
- .bss.DIR1      0x00000000        0x1 main.o
- .data.left_cal
-                0x00000000        0x8 main.o
- .data.right_cal
-                0x00000000        0x8 main.o
+ .bss.LEFT_Vzero_neg
+                0x00000000        0x2 main.o
+ .data.LEFT_Vmax_neg
+                0x00000000        0x2 main.o
+ .bss.LEFT_Vzero_pos
+                0x00000000        0x2 main.o
+ .data.LEFT_Vmax_pos
+                0x00000000        0x2 main.o
+ .bss.RIGHT_zero_neg
+                0x00000000        0x2 main.o
+ .data.RIGHT_Vmax_neg
+                0x00000000        0x2 main.o
+ .bss.RIGHT_Vzero_pos
+                0x00000000        0x2 main.o
+ .data.RIGHT_Vmax_pos
+                0x00000000        0x2 main.o
  .bss.RIGHT_ADCvalue
                 0x00000000        0x2 main.o
  .bss.RIGHT_counter
@@ -137,18 +193,35 @@ Discarded input sections
                 0x00000000        0x2 moteur.o
  .text          0x00000000        0x0 PWM.o
  .bss           0x00000000        0x0 PWM.o
- .bss.DIR2      0x00000000        0x1 PWM.o
- .bss.DIR1      0x00000000        0x1 PWM.o
  .bss.flag_newStatus
+                0x00000000        0x1 PWM.o
+ .bss.flag_trans_ON
+                0x00000000        0x1 PWM.o
+ .data.flag_echo_EN
                 0x00000000        0x1 PWM.o
  .bss.flag_CMD_in
                 0x00000000        0x1 PWM.o
- .bss.uart_counter
+ .bss.commande  0x00000000        0x3 PWM.o
+ .bss.uart_in_counter
                 0x00000000        0x1 PWM.o
- .data.left_cal
-                0x00000000        0x8 PWM.o
- .data.right_cal
-                0x00000000        0x8 PWM.o
+ .bss.uart_out_counter
+                0x00000000        0x1 PWM.o
+ .bss.LEFT_Vzero_neg
+                0x00000000        0x2 PWM.o
+ .data.LEFT_Vmax_neg
+                0x00000000        0x2 PWM.o
+ .bss.LEFT_Vzero_pos
+                0x00000000        0x2 PWM.o
+ .data.LEFT_Vmax_pos
+                0x00000000        0x2 PWM.o
+ .bss.RIGHT_zero_neg
+                0x00000000        0x2 PWM.o
+ .data.RIGHT_Vmax_neg
+                0x00000000        0x2 PWM.o
+ .bss.RIGHT_Vzero_pos
+                0x00000000        0x2 PWM.o
+ .data.RIGHT_Vmax_pos
+                0x00000000        0x2 PWM.o
  .bss.RIGHT_ADCvalue
                 0x00000000        0x2 PWM.o
  .bss.RIGHT_counter
@@ -160,9 +233,7 @@ Discarded input sections
  .text          0x00000000        0x0 UART.o
  .bss           0x00000000        0x0 UART.o
  .text.debug_send
-                0x00000000       0x38 UART.o
- .bss.flag_CMD_in
-                0x00000000        0x1 UART.o
+                0x00000000       0x26 UART.o
  .bss.flag_newStatus
                 0x00000000        0x1 UART.o
  .bss.TICK_counter
@@ -171,12 +242,22 @@ Discarded input sections
                 0x00000000        0x1 UART.o
  .bss.flag_PWMcycle
                 0x00000000        0x1 UART.o
- .bss.DIR2      0x00000000        0x1 UART.o
- .bss.DIR1      0x00000000        0x1 UART.o
- .data.left_cal
-                0x00000000        0x8 UART.o
- .data.right_cal
-                0x00000000        0x8 UART.o
+ .bss.LEFT_Vzero_neg
+                0x00000000        0x2 UART.o
+ .data.LEFT_Vmax_neg
+                0x00000000        0x2 UART.o
+ .bss.LEFT_Vzero_pos
+                0x00000000        0x2 UART.o
+ .data.LEFT_Vmax_pos
+                0x00000000        0x2 UART.o
+ .bss.RIGHT_zero_neg
+                0x00000000        0x2 UART.o
+ .data.RIGHT_Vmax_neg
+                0x00000000        0x2 UART.o
+ .bss.RIGHT_Vzero_pos
+                0x00000000        0x2 UART.o
+ .data.RIGHT_Vmax_pos
+                0x00000000        0x2 UART.o
  .bss.RIGHT_ADCvalue
                 0x00000000        0x2 UART.o
  .bss.RIGHT_counter
@@ -245,6 +326,19 @@ Discarded input sections
  .bss           0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
  .text.avr-libc.fplib
                 0x00000000       0xc2 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+ .text          0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.mul
+                0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.div
+                0x00000000       0x28 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc   0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
  .text          0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
  .text.libgcc.mul
@@ -403,7 +497,7 @@ LOAD e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x2e6
+.text           0x00000000      0x2a2
  *(.vectors)
  .vectors       0x00000000       0x54 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vector_default
@@ -492,19 +586,19 @@ LOAD e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/
                 0x00000168       0x14 PWM.o
                 0x00000168                initTIMER
  .text.__vector_15
-                0x0000017c       0x7a UART.o
+                0x0000017c       0x58 UART.o
                 0x0000017c                __vector_15
  .text.__vector_13
-                0x000001f6       0xdc UART.o
-                0x000001f6                __vector_13
+                0x000001d4       0x9a UART.o
+                0x000001d4                __vector_13
  .text.initUART
-                0x000002d2       0x10 UART.o
-                0x000002d2                initUART
-                0x000002e2                . = ALIGN (0x2)
+                0x0000026e       0x30 UART.o
+                0x0000026e                initUART
+                0x0000029e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000002e2        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
-                0x000002e2                _exit
-                0x000002e2                exit
+ .fini9         0x0000029e        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+                0x0000029e                _exit
+                0x0000029e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -523,11 +617,11 @@ LOAD e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000002e2        0x4 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000029e        0x4 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000002e6                _etext = .
+                0x000002a2                _etext = .
 
-.data           0x00800060        0x0 load address 0x000002e6
+.data           0x00800060        0x2 load address 0x000002a2
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32.o
@@ -552,67 +646,69 @@ LOAD e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(gesf2.o)
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(mulsf3.o)
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+ .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_copy_data.o)
  .data          0x00800060        0x0 e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
  *(.data*)
+ .data.flag_echo_EN
+                0x00800060        0x1 UART.o
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x00800060                . = ALIGN (0x2)
-                0x00800060                _edata = .
-                0x00800060                PROVIDE (__data_end, .)
+                0x00800062                . = ALIGN (0x2)
+ *fill*         0x00800061        0x1 
+                0x00800062                _edata = .
+                0x00800062                PROVIDE (__data_end, .)
 
-.bss            0x00800060       0x1c
-                0x00800060                PROVIDE (__bss_start, .)
+.bss            0x00800062       0x16
+                0x00800062                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.RIGHT_ADCvalue
-                0x00800060        0x2 ADC.o
+                0x00800062        0x2 ADC.o
  .bss.RIGHT_counter
-                0x00800062        0x1 ADC.o
+                0x00800064        0x1 ADC.o
  .bss.LEFT_ADCvalue
-                0x00800063        0x2 ADC.o
+                0x00800065        0x2 ADC.o
  .bss.LEFT_counter
-                0x00800065        0x1 ADC.o
+                0x00800067        0x1 ADC.o
  .bss.flag_newStatus
-                0x00800066        0x1 main.o
- .bss.flag_CMD_in
-                0x00800067        0x1 main.o
- .bss.flag_50ms_TICK
                 0x00800068        0x1 main.o
- .bss.flag_PWMcycle
+ .bss.flag_CMD_in
                 0x00800069        0x1 main.o
- .bss.TICK_counter
-                0x0080006a        0x1 PWM.o
  .bss.flag_50ms_TICK
-                0x0080006b        0x1 PWM.o
+                0x0080006a        0x1 main.o
  .bss.flag_PWMcycle
+                0x0080006b        0x1 main.o
+ .bss.TICK_counter
                 0x0080006c        0x1 PWM.o
- .bss.trans_flag
-                0x0080006d        0x2 UART.o
-                0x0080006d                trans_flag
- .bss.echo_en   0x0080006f        0x2 UART.o
-                0x0080006f                echo_en
- .bss.i         0x00800071        0x2 UART.o
-                0x00800071                i
- .bss.uart_counter
-                0x00800073        0x1 UART.o
+ .bss.flag_50ms_TICK
+                0x0080006d        0x1 PWM.o
+ .bss.flag_PWMcycle
+                0x0080006e        0x1 PWM.o
+ .bss.flag_trans_ON
+                0x0080006f        0x1 UART.o
+ .bss.flag_CMD_in
+                0x00800070        0x1 UART.o
+ .bss.commande  0x00800071        0x3 UART.o
+ .bss.uart_in_counter
+                0x00800074        0x1 UART.o
+ .bss.uart_out_counter
+                0x00800075        0x1 UART.o
  .bss.uart_data_ptr
-                0x00800074        0x2 UART.o
+                0x00800076        0x2 UART.o
  *(COMMON)
- COMMON         0x00800076        0x6 UART.o
-                0x00800076                commande
-                0x0080007c                PROVIDE (__bss_end, .)
-                0x000002e6                __data_load_start = LOADADDR (.data)
-                0x000002e6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800078                PROVIDE (__bss_end, .)
+                0x000002a2                __data_load_start = LOADADDR (.data)
+                0x000002a4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080007c        0x0
-                0x0080007c                PROVIDE (__noinit_start, .)
+.noinit         0x00800078        0x0
+                0x00800078                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0080007c                PROVIDE (__noinit_end, .)
-                0x0080007c                _end = .
-                0x0080007c                PROVIDE (__heap_start, .)
+                0x00800078                PROVIDE (__noinit_end, .)
+                0x00800078                _end = .
+                0x00800078                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -705,82 +801,83 @@ LOAD e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xf0
+.debug_aranges  0x00000000      0x118
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x30 ADC.o
+                0x00000000       0x48 ADC.o
  .debug_aranges
-                0x00000030       0x20 LED.o
+                0x00000048       0x30 LED.o
  .debug_aranges
-                0x00000050       0x20 main.o
+                0x00000078       0x20 main.o
  .debug_aranges
-                0x00000070       0x20 moteur.o
+                0x00000098       0x20 moteur.o
  .debug_aranges
-                0x00000090       0x28 PWM.o
+                0x000000b8       0x28 PWM.o
  .debug_aranges
-                0x000000b8       0x38 UART.o
+                0x000000e0       0x38 UART.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xbed
+.debug_info     0x00000000      0xf15
  *(.debug_info)
- .debug_info    0x00000000      0x1eb ADC.o
- .debug_info    0x000001eb      0x1bf LED.o
- .debug_info    0x000003aa      0x206 main.o
- .debug_info    0x000005b0      0x144 moteur.o
- .debug_info    0x000006f4      0x1d5 PWM.o
- .debug_info    0x000008c9      0x324 UART.o
+ .debug_info    0x00000000      0x397 ADC.o
+ .debug_info    0x00000397      0x294 LED.o
+ .debug_info    0x0000062b      0x289 main.o
+ .debug_info    0x000008b4      0x144 moteur.o
+ .debug_info    0x000009f8      0x258 PWM.o
+ .debug_info    0x00000c50      0x2c5 UART.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x4bf
+.debug_abbrev   0x00000000      0x4cb
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0xa7 ADC.o
- .debug_abbrev  0x000000a7       0x8f LED.o
- .debug_abbrev  0x00000136       0xc5 main.o
- .debug_abbrev  0x000001fb       0x9a moteur.o
- .debug_abbrev  0x00000295       0xa7 PWM.o
- .debug_abbrev  0x0000033c      0x183 UART.o
+ .debug_abbrev  0x00000000      0x103 ADC.o
+ .debug_abbrev  0x00000103       0xc7 LED.o
+ .debug_abbrev  0x000001ca       0xc5 main.o
+ .debug_abbrev  0x0000028f       0x9a moteur.o
+ .debug_abbrev  0x00000329       0xa7 PWM.o
+ .debug_abbrev  0x000003d0       0xfb UART.o
 
-.debug_line     0x00000000      0x6e7
+.debug_line     0x00000000      0x6e8
  *(.debug_line)
- .debug_line    0x00000000      0x10c ADC.o
- .debug_line    0x0000010c       0xe4 LED.o
- .debug_line    0x000001f0       0xed main.o
- .debug_line    0x000002dd      0x131 moteur.o
- .debug_line    0x0000040e       0xfd PWM.o
- .debug_line    0x0000050b      0x1dc UART.o
+ .debug_line    0x00000000      0x187 ADC.o
+ .debug_line    0x00000187      0x100 LED.o
+ .debug_line    0x00000287       0xed main.o
+ .debug_line    0x00000374      0x131 moteur.o
+ .debug_line    0x000004a5       0xfd PWM.o
+ .debug_line    0x000005a2      0x146 UART.o
 
-.debug_frame    0x00000000      0x20c
+.debug_frame    0x00000000      0x254
  *(.debug_frame)
- .debug_frame   0x00000000       0x64 ADC.o
- .debug_frame   0x00000064       0x24 LED.o
- .debug_frame   0x00000088       0x24 main.o
- .debug_frame   0x000000ac       0x84 moteur.o
- .debug_frame   0x00000130       0x44 PWM.o
- .debug_frame   0x00000174       0x98 UART.o
+ .debug_frame   0x00000000       0x94 ADC.o
+ .debug_frame   0x00000094       0x44 LED.o
+ .debug_frame   0x000000d8       0x24 main.o
+ .debug_frame   0x000000fc       0x84 moteur.o
+ .debug_frame   0x00000180       0x44 PWM.o
+ .debug_frame   0x000001c4       0x90 UART.o
 
-.debug_str      0x00000000      0x298
+.debug_str      0x00000000      0x326
  *(.debug_str)
- .debug_str     0x00000000      0x16b ADC.o
-                                0x1a4 (size before relaxing)
- .debug_str     0x0000016b       0x13 LED.o
-                                0x187 (size before relaxing)
- .debug_str     0x0000017e       0x24 main.o
-                                0x1a0 (size before relaxing)
- .debug_str     0x000001a2       0x62 moteur.o
+ .debug_str     0x00000000      0x229 ADC.o
+                                0x262 (size before relaxing)
+ .debug_str     0x00000229       0x28 LED.o
+                                0x22e (size before relaxing)
+ .debug_str     0x00000251       0x24 main.o
+                                0x232 (size before relaxing)
+ .debug_str     0x00000275       0x62 moteur.o
                                  0xa1 (size before relaxing)
- .debug_str     0x00000204       0x16 PWM.o
-                                0x194 (size before relaxing)
- .debug_str     0x0000021a       0x7e UART.o
-                                0x1fb (size before relaxing)
+ .debug_str     0x000002d7       0x16 PWM.o
+                                0x226 (size before relaxing)
+ .debug_str     0x000002ed       0x39 UART.o
+                                0x248 (size before relaxing)
 
-.debug_loc      0x00000000      0x3e5
+.debug_loc      0x00000000      0x3ed
  *(.debug_loc)
- .debug_loc     0x00000000       0x63 ADC.o
- .debug_loc     0x00000063      0x20b moteur.o
- .debug_loc     0x0000026e       0x3c PWM.o
- .debug_loc     0x000002aa      0x13b UART.o
+ .debug_loc     0x00000000       0x84 ADC.o
+ .debug_loc     0x00000084       0x21 LED.o
+ .debug_loc     0x000000a5      0x20b moteur.o
+ .debug_loc     0x000002b0       0x3c PWM.o
+ .debug_loc     0x000002ec      0x101 UART.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -788,14 +885,14 @@ LOAD e:/avr/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x90
+.debug_ranges   0x00000000       0xb8
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x20 ADC.o
- .debug_ranges  0x00000020       0x10 LED.o
- .debug_ranges  0x00000030       0x10 main.o
- .debug_ranges  0x00000040       0x10 moteur.o
- .debug_ranges  0x00000050       0x18 PWM.o
- .debug_ranges  0x00000068       0x28 UART.o
+ .debug_ranges  0x00000000       0x38 ADC.o
+ .debug_ranges  0x00000038       0x20 LED.o
+ .debug_ranges  0x00000058       0x10 main.o
+ .debug_ranges  0x00000068       0x10 moteur.o
+ .debug_ranges  0x00000078       0x18 PWM.o
+ .debug_ranges  0x00000090       0x28 UART.o
 
 .debug_macro
  *(.debug_macro)

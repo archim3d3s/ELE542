@@ -3,33 +3,33 @@ ELE542.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000002e6  00000000  00000000  00000094  2**1
+  0 .text         000002a2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  000002e6  0000037a  2**0
+  1 .data         00000002  00800060  000002a2  00000336  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000001c  00800060  00800060  0000037a  2**0
+  2 .bss          00000016  00800062  00800062  00000338  2**0
                   ALLOC
-  3 .stab         00001c44  00000000  00000000  0000037c  2**2
+  3 .stab         00001c44  00000000  00000000  00000338  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00000760  00000000  00000000  00001fc0  2**0
+  4 .stabstr      00000760  00000000  00000000  00001f7c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .comment      0000002f  00000000  00000000  00002720  2**0
+  5 .comment      0000002f  00000000  00000000  000026dc  2**0
                   CONTENTS, READONLY
-  6 .debug_aranges 000000f0  00000000  00000000  0000274f  2**0
+  6 .debug_aranges 00000118  00000000  00000000  0000270b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   00000bed  00000000  00000000  0000283f  2**0
+  7 .debug_info   00000f15  00000000  00000000  00002823  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000004bf  00000000  00000000  0000342c  2**0
+  8 .debug_abbrev 000004cb  00000000  00000000  00003738  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   000006e7  00000000  00000000  000038eb  2**0
+  9 .debug_line   000006e8  00000000  00000000  00003c03  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  0000020c  00000000  00000000  00003fd4  2**2
+ 10 .debug_frame  00000254  00000000  00000000  000042ec  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00000298  00000000  00000000  000041e0  2**0
+ 11 .debug_str    00000326  00000000  00000000  00004540  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    000003e5  00000000  00000000  00004478  2**0
+ 12 .debug_loc    000003ed  00000000  00000000  00004866  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000090  00000000  00000000  0000485d  2**0
+ 13 .debug_ranges 000000b8  00000000  00000000  00004c53  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -52,7 +52,7 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  34:	0c 94 fb 00 	jmp	0x1f6	; 0x1f6 <__vector_13>
+  34:	0c 94 ea 00 	jmp	0x1d4	; 0x1d4 <__vector_13>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   3c:	0c 94 be 00 	jmp	0x17c	; 0x17c <__vector_15>
   40:	0c 94 49 00 	jmp	0x92	; 0x92 <__vector_16>
@@ -79,18 +79,18 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 ee       	ldi	r30, 0xE6	; 230
+  66:	e2 ea       	ldi	r30, 0xA2	; 162
   68:	f2 e0       	ldi	r31, 0x02	; 2
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	a0 36       	cpi	r26, 0x60	; 96
+  70:	a2 36       	cpi	r26, 0x62	; 98
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	20 e0       	ldi	r18, 0x00	; 0
-  78:	a0 e6       	ldi	r26, 0x60	; 96
+  78:	a2 e6       	ldi	r26, 0x62	; 98
   7a:	b0 e0       	ldi	r27, 0x00	; 0
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -98,11 +98,11 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	ac 37       	cpi	r26, 0x7C	; 124
+  80:	a8 37       	cpi	r26, 0x78	; 120
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 89 00 	call	0x112	; 0x112 <main>
-  8a:	0c 94 71 01 	jmp	0x2e2	; 0x2e2 <_exit>
+  8a:	0c 94 4f 01 	jmp	0x29e	; 0x29e <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -121,31 +121,31 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
   a4:	87 b1       	in	r24, 0x07	; 7
   a6:	88 23       	and	r24, r24
   a8:	91 f0       	breq	.+36     	; 0xce <__vector_16+0x3c>
-  aa:	80 91 62 00 	lds	r24, 0x0062
+  aa:	80 91 64 00 	lds	r24, 0x0064
   ae:	8f 5f       	subi	r24, 0xFF	; 255
-  b0:	80 93 62 00 	sts	0x0062, r24
+  b0:	80 93 64 00 	sts	0x0064, r24
   b4:	84 b1       	in	r24, 0x04	; 4
   b6:	95 b1       	in	r25, 0x05	; 5
-  b8:	20 91 60 00 	lds	r18, 0x0060
-  bc:	30 91 61 00 	lds	r19, 0x0061
+  b8:	20 91 62 00 	lds	r18, 0x0062
+  bc:	30 91 63 00 	lds	r19, 0x0063
   c0:	82 0f       	add	r24, r18
   c2:	93 1f       	adc	r25, r19
-  c4:	90 93 61 00 	sts	0x0061, r25
-  c8:	80 93 60 00 	sts	0x0060, r24
+  c4:	90 93 63 00 	sts	0x0063, r25
+  c8:	80 93 62 00 	sts	0x0062, r24
   cc:	11 c0       	rjmp	.+34     	; 0xf0 <__vector_16+0x5e>
-  ce:	80 91 65 00 	lds	r24, 0x0065
+  ce:	80 91 67 00 	lds	r24, 0x0067
   d2:	8f 5f       	subi	r24, 0xFF	; 255
-  d4:	80 93 65 00 	sts	0x0065, r24
+  d4:	80 93 67 00 	sts	0x0067, r24
   d8:	84 b1       	in	r24, 0x04	; 4
   da:	95 b1       	in	r25, 0x05	; 5
-  dc:	20 91 63 00 	lds	r18, 0x0063
+  dc:	20 91 65 00 	lds	r18, 0x0065
 		
 	Old_W = W;
-  e0:	30 91 64 00 	lds	r19, 0x0064
+  e0:	30 91 66 00 	lds	r19, 0x0066
   e4:	82 0f       	add	r24, r18
   e6:	93 1f       	adc	r25, r19
-  e8:	90 93 64 00 	sts	0x0064, r25
-  ec:	80 93 63 00 	sts	0x0063, r24
+  e8:	90 93 66 00 	sts	0x0066, r25
+  ec:	80 93 65 00 	sts	0x0065, r24
   f0:	97 b1       	in	r25, 0x07	; 7
   f2:	81 e0       	ldi	r24, 0x01	; 1
   f4:	89 27       	eor	r24, r25
@@ -168,14 +168,14 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
  110:	08 95       	ret
 
 00000112 <main>:
- 112:	0e 94 69 01 	call	0x2d2	; 0x2d2 <initUART>
+ 112:	0e 94 37 01 	call	0x26e	; 0x26e <initUART>
  116:	0e 94 b4 00 	call	0x168	; 0x168 <initTIMER>
  11a:	0e 94 85 00 	call	0x10a	; 0x10a <initLED>
  11e:	78 94       	sei
- 120:	80 91 67 00 	lds	r24, 0x0067
- 124:	80 91 68 00 	lds	r24, 0x0068
- 128:	80 91 69 00 	lds	r24, 0x0069
- 12c:	80 91 66 00 	lds	r24, 0x0066
+ 120:	80 91 69 00 	lds	r24, 0x0069
+ 124:	80 91 6a 00 	lds	r24, 0x006A
+ 128:	80 91 6b 00 	lds	r24, 0x006B
+ 12c:	80 91 68 00 	lds	r24, 0x0068
  130:	f7 cf       	rjmp	.-18     	; 0x120 <main+0xe>
 
 00000132 <__vector_9>:
@@ -186,16 +186,16 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
  13a:	11 24       	eor	r1, r1
  13c:	8f 93       	push	r24
  13e:	81 e0       	ldi	r24, 0x01	; 1
- 140:	80 93 6c 00 	sts	0x006C, r24
+ 140:	80 93 6e 00 	sts	0x006E, r24
 	Vt    = 0.5*(Vd+Vg);
- 144:	80 91 6a 00 	lds	r24, 0x006A
+ 144:	80 91 6c 00 	lds	r24, 0x006C
  148:	8f 5f       	subi	r24, 0xFF	; 255
- 14a:	80 93 6a 00 	sts	0x006A, r24
- 14e:	80 91 6a 00 	lds	r24, 0x006A
+ 14a:	80 93 6c 00 	sts	0x006C, r24
+ 14e:	80 91 6c 00 	lds	r24, 0x006C
  152:	8a 30       	cpi	r24, 0x0A	; 10
  154:	19 f4       	brne	.+6      	; 0x15c <__vector_9+0x2a>
  156:	81 e0       	ldi	r24, 0x01	; 1
- 158:	80 93 6b 00 	sts	0x006B, r24
+ 158:	80 93 6d 00 	sts	0x006D, r24
  15c:	8f 91       	pop	r24
  15e:	0f 90       	pop	r0
  160:	0f be       	out	0x3f, r0	; 63
@@ -224,150 +224,129 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
  182:	0f 92       	push	r0
  184:	11 24       	eor	r1, r1
  186:	8f 93       	push	r24
- 188:	9f 93       	push	r25
- 18a:	ef 93       	push	r30
- 18c:	ff 93       	push	r31
- 18e:	80 91 73 00 	lds	r24, 0x0073
- 192:	88 23       	and	r24, r24
- 194:	81 f0       	breq	.+32     	; 0x1b6 <__vector_15+0x3a>
- 196:	e0 91 74 00 	lds	r30, 0x0074
- 19a:	f0 91 75 00 	lds	r31, 0x0075
- 19e:	81 91       	ld	r24, Z+
- 1a0:	8c b9       	out	0x0c, r24	; 12
- 1a2:	f0 93 75 00 	sts	0x0075, r31
- 1a6:	e0 93 74 00 	sts	0x0074, r30
- 1aa:	80 91 73 00 	lds	r24, 0x0073
- 1ae:	81 50       	subi	r24, 0x01	; 1
- 1b0:	80 93 73 00 	sts	0x0073, r24
- 1b4:	17 c0       	rjmp	.+46     	; 0x1e4 <__vector_15+0x68>
- 1b6:	80 91 6d 00 	lds	r24, 0x006D
- 1ba:	90 91 6e 00 	lds	r25, 0x006E
- 1be:	01 97       	sbiw	r24, 0x01	; 1
- 1c0:	59 f4       	brne	.+22     	; 0x1d8 <__vector_15+0x5c>
- 1c2:	80 91 73 00 	lds	r24, 0x0073
+ 188:	ef 93       	push	r30
+ 18a:	ff 93       	push	r31
+ 18c:	80 91 75 00 	lds	r24, 0x0075
+ 190:	88 23       	and	r24, r24
+ 192:	81 f0       	breq	.+32     	; 0x1b4 <__vector_15+0x38>
+ 194:	e0 91 76 00 	lds	r30, 0x0076
+ 198:	f0 91 77 00 	lds	r31, 0x0077
+ 19c:	81 91       	ld	r24, Z+
+ 19e:	8c b9       	out	0x0c, r24	; 12
+ 1a0:	f0 93 77 00 	sts	0x0077, r31
+ 1a4:	e0 93 76 00 	sts	0x0076, r30
+ 1a8:	80 91 75 00 	lds	r24, 0x0075
+ 1ac:	81 50       	subi	r24, 0x01	; 1
+ 1ae:	80 93 75 00 	sts	0x0075, r24
+ 1b2:	08 c0       	rjmp	.+16     	; 0x1c4 <__vector_15+0x48>
+ 1b4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1b6:	8c b9       	out	0x0c, r24	; 12
+ 1b8:	10 92 6f 00 	sts	0x006F, r1
+ 1bc:	81 e0       	ldi	r24, 0x01	; 1
+ 1be:	80 93 60 00 	sts	0x0060, r24
+ 1c2:	56 98       	cbi	0x0a, 6	; 10
 	Angle = (Angle > 2.0*Pi) ? Angle - 2*Pi : ((Angle < 0.0) ? Angle + 2*Pi : Angle); /* Angle entre 0 et 2 pi */
- 1c6:	81 11       	cpse	r24, r1
- 1c8:	07 c0       	rjmp	.+14     	; 0x1d8 <__vector_15+0x5c>
- 1ca:	8f ef       	ldi	r24, 0xFF	; 255
- 1cc:	8c b9       	out	0x0c, r24	; 12
- 1ce:	10 92 6e 00 	sts	0x006E, r1
- 1d2:	10 92 6d 00 	sts	0x006D, r1
- 1d6:	06 c0       	rjmp	.+12     	; 0x1e4 <__vector_15+0x68>
- 1d8:	81 e0       	ldi	r24, 0x01	; 1
- 1da:	90 e0       	ldi	r25, 0x00	; 0
- 1dc:	90 93 70 00 	sts	0x0070, r25
- 1e0:	80 93 6f 00 	sts	0x006F, r24
- 1e4:	ff 91       	pop	r31
- 1e6:	ef 91       	pop	r30
- 1e8:	9f 91       	pop	r25
- 1ea:	8f 91       	pop	r24
- 1ec:	0f 90       	pop	r0
- 1ee:	0f be       	out	0x3f, r0	; 63
- 1f0:	0f 90       	pop	r0
- 1f2:	1f 90       	pop	r1
- 1f4:	18 95       	reti
+ 1c4:	ff 91       	pop	r31
+ 1c6:	ef 91       	pop	r30
+ 1c8:	8f 91       	pop	r24
+ 1ca:	0f 90       	pop	r0
+ 1cc:	0f be       	out	0x3f, r0	; 63
+ 1ce:	0f 90       	pop	r0
+ 1d0:	1f 90       	pop	r1
+ 1d2:	18 95       	reti
 
-000001f6 <__vector_13>:
- 1f6:	1f 92       	push	r1
- 1f8:	0f 92       	push	r0
- 1fa:	0f b6       	in	r0, 0x3f	; 63
- 1fc:	0f 92       	push	r0
- 1fe:	11 24       	eor	r1, r1
- 200:	2f 93       	push	r18
- 202:	8f 93       	push	r24
- 204:	9f 93       	push	r25
- 206:	ef 93       	push	r30
- 208:	ff 93       	push	r31
- 20a:	2c b1       	in	r18, 0x0c	; 12
- 20c:	80 91 71 00 	lds	r24, 0x0071
- 210:	90 91 72 00 	lds	r25, 0x0072
- 214:	89 2b       	or	r24, r25
- 216:	d1 f4       	brne	.+52     	; 0x24c <__vector_13+0x56>
- 218:	82 2f       	mov	r24, r18
- 21a:	80 5f       	subi	r24, 0xF0	; 240
- 21c:	82 30       	cpi	r24, 0x02	; 2
- 21e:	b0 f4       	brcc	.+44     	; 0x24c <__vector_13+0x56>
- 220:	e0 91 71 00 	lds	r30, 0x0071
- 224:	f0 91 72 00 	lds	r31, 0x0072
- 228:	82 2f       	mov	r24, r18
- 22a:	90 e0       	ldi	r25, 0x00	; 0
- 22c:	ee 0f       	add	r30, r30
- 22e:	ff 1f       	adc	r31, r31
- 230:	ea 58       	subi	r30, 0x8A	; 138
- 232:	ff 4f       	sbci	r31, 0xFF	; 255
- 234:	91 83       	std	Z+1, r25	; 0x01
- 236:	80 83       	st	Z, r24
- 238:	80 91 71 00 	lds	r24, 0x0071
+000001d4 <__vector_13>:
+ 1d4:	1f 92       	push	r1
+ 1d6:	0f 92       	push	r0
+ 1d8:	0f b6       	in	r0, 0x3f	; 63
+ 1da:	0f 92       	push	r0
+ 1dc:	11 24       	eor	r1, r1
+ 1de:	8f 93       	push	r24
+ 1e0:	9f 93       	push	r25
+ 1e2:	ef 93       	push	r30
+ 1e4:	ff 93       	push	r31
+ 1e6:	8c b1       	in	r24, 0x0c	; 12
+ 1e8:	a8 95       	wdr
+ 1ea:	80 3f       	cpi	r24, 0xF0	; 240
+ 1ec:	79 f4       	brne	.+30     	; 0x20c <__vector_13+0x38>
+ 1ee:	90 91 74 00 	lds	r25, 0x0074
+ 1f2:	91 11       	cpse	r25, r1
+ 1f4:	1d c0       	rjmp	.+58     	; 0x230 <__vector_13+0x5c>
+ 1f6:	e0 91 74 00 	lds	r30, 0x0074
+ 1fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 1fc:	ef 58       	subi	r30, 0x8F	; 143
+ 1fe:	ff 4f       	sbci	r31, 0xFF	; 255
+ 200:	90 ef       	ldi	r25, 0xF0	; 240
+ 202:	90 83       	st	Z, r25
+ 204:	91 e0       	ldi	r25, 0x01	; 1
+ 206:	90 93 70 00 	sts	0x0070, r25
+ 20a:	1d c0       	rjmp	.+58     	; 0x246 <__vector_13+0x72>
+ 20c:	81 3f       	cpi	r24, 0xF1	; 241
+ 20e:	81 f4       	brne	.+32     	; 0x230 <__vector_13+0x5c>
+ 210:	90 91 74 00 	lds	r25, 0x0074
+ 214:	91 11       	cpse	r25, r1
+ 216:	0c c0       	rjmp	.+24     	; 0x230 <__vector_13+0x5c>
+ 218:	e0 91 74 00 	lds	r30, 0x0074
+ 21c:	f0 e0       	ldi	r31, 0x00	; 0
+ 21e:	ef 58       	subi	r30, 0x8F	; 143
+ 220:	ff 4f       	sbci	r31, 0xFF	; 255
+ 222:	90 81       	ld	r25, Z
+ 224:	90 91 74 00 	lds	r25, 0x0074
+ 228:	9f 5f       	subi	r25, 0xFF	; 255
+ 22a:	90 93 74 00 	sts	0x0074, r25
+ 22e:	0b c0       	rjmp	.+22     	; 0x246 <__vector_13+0x72>
+ 230:	e0 91 74 00 	lds	r30, 0x0074
+ 234:	f0 e0       	ldi	r31, 0x00	; 0
+ 236:	ef 58       	subi	r30, 0x8F	; 143
+ 238:	ff 4f       	sbci	r31, 0xFF	; 255
+ 23a:	80 83       	st	Z, r24
 	ErreurAngle = ((Angle_D >= Pi + Angle) ? Angle_D - 2*Pi : ((Angle_D <= -Pi + Angle) ? Angle_D + 2*Pi : Angle_D))-Angle;
- 23c:	90 91 72 00 	lds	r25, 0x0072
- 240:	01 96       	adiw	r24, 0x01	; 1
- 242:	90 93 72 00 	sts	0x0072, r25
- 246:	80 93 71 00 	sts	0x0071, r24
- 24a:	32 c0       	rjmp	.+100    	; 0x2b0 <__vector_13+0xba>
- 24c:	80 91 71 00 	lds	r24, 0x0071
- 250:	90 91 72 00 	lds	r25, 0x0072
- 254:	01 97       	sbiw	r24, 0x01	; 1
- 256:	b1 f4       	brne	.+44     	; 0x284 <__vector_13+0x8e>
- 258:	e0 91 71 00 	lds	r30, 0x0071
- 25c:	f0 91 72 00 	lds	r31, 0x0072
- 260:	82 2f       	mov	r24, r18
- 262:	90 e0       	ldi	r25, 0x00	; 0
- 264:	ee 0f       	add	r30, r30
- 266:	ff 1f       	adc	r31, r31
- 268:	ea 58       	subi	r30, 0x8A	; 138
- 26a:	ff 4f       	sbci	r31, 0xFF	; 255
- 26c:	91 83       	std	Z+1, r25	; 0x01
- 26e:	80 83       	st	Z, r24
- 270:	80 91 71 00 	lds	r24, 0x0071
- 274:	90 91 72 00 	lds	r25, 0x0072
- 278:	01 96       	adiw	r24, 0x01	; 1
- 27a:	90 93 72 00 	sts	0x0072, r25
- 27e:	80 93 71 00 	sts	0x0071, r24
- 282:	16 c0       	rjmp	.+44     	; 0x2b0 <__vector_13+0xba>
- 284:	80 91 71 00 	lds	r24, 0x0071
- 288:	90 91 72 00 	lds	r25, 0x0072
- 28c:	02 97       	sbiw	r24, 0x02	; 2
- 28e:	81 f4       	brne	.+32     	; 0x2b0 <__vector_13+0xba>
- 290:	e0 91 71 00 	lds	r30, 0x0071
- 294:	f0 91 72 00 	lds	r31, 0x0072
- 298:	82 2f       	mov	r24, r18
- 29a:	90 e0       	ldi	r25, 0x00	; 0
- 29c:	ee 0f       	add	r30, r30
- 29e:	ff 1f       	adc	r31, r31
- 2a0:	ea 58       	subi	r30, 0x8A	; 138
- 2a2:	ff 4f       	sbci	r31, 0xFF	; 255
- 2a4:	91 83       	std	Z+1, r25	; 0x01
- 2a6:	80 83       	st	Z, r24
- 2a8:	10 92 72 00 	sts	0x0072, r1
- 2ac:	10 92 71 00 	sts	0x0071, r1
- 2b0:	80 91 6f 00 	lds	r24, 0x006F
- 2b4:	90 91 70 00 	lds	r25, 0x0070
- 2b8:	01 97       	sbiw	r24, 0x01	; 1
- 2ba:	09 f4       	brne	.+2      	; 0x2be <__vector_13+0xc8>
- 2bc:	2c b9       	out	0x0c, r18	; 12
- 2be:	ff 91       	pop	r31
- 2c0:	ef 91       	pop	r30
- 2c2:	9f 91       	pop	r25
- 2c4:	8f 91       	pop	r24
- 2c6:	2f 91       	pop	r18
- 2c8:	0f 90       	pop	r0
- 2ca:	0f be       	out	0x3f, r0	; 63
- 2cc:	0f 90       	pop	r0
- 2ce:	1f 90       	pop	r1
- 2d0:	18 95       	reti
+ 23c:	90 91 74 00 	lds	r25, 0x0074
+ 240:	9f 5f       	subi	r25, 0xFF	; 255
+ 242:	90 93 74 00 	sts	0x0074, r25
+ 246:	90 91 74 00 	lds	r25, 0x0074
+ 24a:	93 30       	cpi	r25, 0x03	; 3
+ 24c:	11 f4       	brne	.+4      	; 0x252 <__vector_13+0x7e>
+ 24e:	10 92 74 00 	sts	0x0074, r1
+ 252:	90 91 60 00 	lds	r25, 0x0060
+ 256:	91 30       	cpi	r25, 0x01	; 1
+ 258:	09 f4       	brne	.+2      	; 0x25c <__vector_13+0x88>
+ 25a:	8c b9       	out	0x0c, r24	; 12
+ 25c:	ff 91       	pop	r31
+ 25e:	ef 91       	pop	r30
+ 260:	9f 91       	pop	r25
+ 262:	8f 91       	pop	r24
+ 264:	0f 90       	pop	r0
+ 266:	0f be       	out	0x3f, r0	; 63
+ 268:	0f 90       	pop	r0
+ 26a:	1f 90       	pop	r1
+ 26c:	18 95       	reti
 
-000002d2 <initUART>:
- 2d2:	86 e8       	ldi	r24, 0x86	; 134
- 2d4:	80 bd       	out	0x20, r24	; 32
- 2d6:	88 ed       	ldi	r24, 0xD8	; 216
- 2d8:	8a b9       	out	0x0a, r24	; 10
- 2da:	10 bc       	out	0x20, r1	; 32
- 2dc:	87 e6       	ldi	r24, 0x67	; 103
- 2de:	89 b9       	out	0x09, r24	; 9
- 2e0:	08 95       	ret
+0000026e <initUART>:
+ 26e:	81 e0       	ldi	r24, 0x01	; 1
+ 270:	80 93 60 00 	sts	0x0060, r24
+ 274:	10 92 75 00 	sts	0x0075, r1
+ 278:	10 92 74 00 	sts	0x0074, r1
+ 27c:	86 e8       	ldi	r24, 0x86	; 134
+ 27e:	80 bd       	out	0x20, r24	; 32
+ 280:	88 ed       	ldi	r24, 0xD8	; 216
+ 282:	8a b9       	out	0x0a, r24	; 10
+ 284:	10 bc       	out	0x20, r1	; 32
+ 286:	87 e6       	ldi	r24, 0x67	; 103
+ 288:	89 b9       	out	0x09, r24	; 9
+ 28a:	2e e0       	ldi	r18, 0x0E	; 14
+ 28c:	88 e1       	ldi	r24, 0x18	; 24
+ 28e:	90 e0       	ldi	r25, 0x00	; 0
+ 290:	0f b6       	in	r0, 0x3f	; 63
+ 292:	f8 94       	cli
+ 294:	a8 95       	wdr
+ 296:	81 bd       	out	0x21, r24	; 33
+ 298:	0f be       	out	0x3f, r0	; 63
+ 29a:	21 bd       	out	0x21, r18	; 33
+ 29c:	08 95       	ret
 
-000002e2 <_exit>:
- 2e2:	f8 94       	cli
+0000029e <_exit>:
+ 29e:	f8 94       	cli
 
-000002e4 <__stop_program>:
- 2e4:	ff cf       	rjmp	.-2      	; 0x2e4 <__stop_program>
+000002a0 <__stop_program>:
+ 2a0:	ff cf       	rjmp	.-2      	; 0x2a0 <__stop_program>

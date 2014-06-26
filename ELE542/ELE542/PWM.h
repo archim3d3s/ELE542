@@ -3,14 +3,8 @@
 
 #include "main.h"
 
-//     Bits de direction
-// DIR2	DIR1 Sens de rotation
-//  0    0		 Neutre
-//  0    1	   Marche avant
-//  1    0	  Marche arriere
-//  1    1       Freins
-static volatile uint8_t DIR1=0;
-static volatile uint8_t DIR2=0;
+#define PWM_GAUCHE	OCR1B
+#define PWM_DROIT	OCR1A
 
 static volatile uint8_t flag_PWMcycle = 0;
 static volatile uint8_t flag_50ms_TICK = 0;

@@ -1,87 +1,90 @@
 #include "uart.h"
 
-volatile int i = 0;
-volatile int echo_en = 0;
-volatile int trans_flag = 0;
-volatile int commande[3];
-
 ISR(USART_TXC_vect)      
-/* signal handler for uart txd ready interrupt */
 {
-	if (uart_counter)
+	if (uart_out_counter)
 	{
- 		UDR = *uart_data_ptr; /*write byte to data buffer */
+		UDR = *uart_data_ptr;
 		uart_data_ptr++;
-		uart_counter--;
-	}
-	else if(trans_flag==1 && uart_counter==0)
-	{
-		UDR=0xFF;
-		trans_flag = 0;
+		uart_out_counter--;
 	}
 	else
-	{			  
-		echo_en = 1	;	
+	{
+		UDR = 0xFF;
+		flag_trans_ON = 0;
+		flag_echo_EN = 1;
+		UCSRB &= ~(1<<TXCIE);
 	}
 }
 
 ISR(USART_RXC_vect)      
-/* signal handler for receive complete interrupt */
 {
-	char data =0;
+	uint8_t data;
 	data = UDR;
 
-	/* vérification de la reception de commande et écriture*/
-	if( i == 0  &&(data == 0xF1 || data == 0xF0))
-	{	
- 		commande[i] = data;
- 		i++;
-	}
-
-	else if(i==1)
+	/* Reset WATCHDOG*/
+	wdt_reset();
+		
+	if(data == 0xF0 && uart_in_counter == 0)
 	{
- 		commande[i] = data;
- 		i++;
-	}
-
-	else if(i==2)
+		commande[uart_in_counter] = data;
+		flag_CMD_in = 1;
+	} 
+	else if(data == 0xF1 && uart_in_counter == 0)
 	{
- 		commande[i] = data;
- 		i=0;
+		commande[uart_in_counter] == data;
+		uart_in_counter++;
+	}
+	else
+	{
+ 		commande[uart_in_counter] = data;
+ 		uart_in_counter++;
+	}
+	/* Reset counter*/
+	if(uart_in_counter == 3)
+	{
+ 		uart_in_counter = 0;
 	}
 
-/* echo*/
-
-	if( echo_en == 1)
+	/* Send echo if enabled */
+	if( flag_echo_EN == 1)
 	{
 		UDR = data;
 	}
 }
 
 void debug_send(uint8_t *buf, uint8_t size)
-/* send buffer <buf> to uart */
 {   
-     echo_en =0	;
-
-	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    flag_echo_EN =0	;
+	UCSRB |= (1<<TXCIE);
+	
+ 	if (flag_trans_ON == 0) 
 	{
-	 	 if (trans_flag == 0) 
-		 {
-	        uart_data_ptr  = buf;
-	        uart_counter   = size;
-	        UDR = 0xFE;
-			trans_flag = 1;
-	   	 }
-	}
+        uart_data_ptr  = buf;
+	    uart_out_counter = size;
+        flag_trans_ON = 1;
+		UDR = 0xFE;
+   	}
 }
 
 void initUART(void)
 {
-    /* configure asynchronous operation, no parity, 1 stop bit, 8 data bits, Tx on rising edge */
-    UCSRC = (1<<URSEL)|(0<<UMSEL)|(0<<UPM1)|(0<<UPM0)|(0<<USBS)|(1<<UCSZ1)|(1<<UCSZ0)|(0<<UCPOL);   
-    /* enable RxD/TxD and ints */
+	//- vitesse = 9600 Baud 
+	//- 1 bit d’arrêt 
+	//- Mode : Interruption
+	//- 8 bits de données 	//- pas de parité	
+	flag_echo_EN = 1;
+	uart_out_counter = 0;
+	uart_in_counter = 0;
+    UCSRC = (1<<URSEL)|(0<<UMSEL)|(0<<UPM1)|(0<<UPM0)|(0<<USBS)|(1<<UCSZ1)|(1<<UCSZ0)|(0<<UCPOL);
     UCSRB = (1<<RXCIE)|(1<<TXCIE)|(1<<RXEN)|(1<<TXEN)|(0<<UCSZ2);       
+   
     /* set baud rate */
     UBRRH = (uint8_t)(UART_BAUD_SELECT >> 8);         
-    UBRRL = (uint8_t)(UART_BAUD_SELECT & 0x00FF);          
+    UBRRL = (uint8_t)(UART_BAUD_SELECT & 0x00FF);
+	
+	/*Enable WATCHDOG with a 1s timer*/
+	wdt_enable(WDTO_1S);          
 }
+
+

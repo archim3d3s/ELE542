@@ -123,6 +123,12 @@
     <Compile Include="PWM.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="TWI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="UART.c">
       <SubType>compile</SubType>
     </Compile>

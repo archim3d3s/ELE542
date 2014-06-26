@@ -17,7 +17,7 @@ void initTIMER(void)
 	// fPWM = 200 Hz 
 	// PWMB = moteur gauche
 	// PWMA = moteur droit 
-	//
+
 	// Mode d’opération recommandé :
 	//  - Interruption de débordement
 	//  - Niveau haut au débordement

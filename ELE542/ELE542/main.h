@@ -3,8 +3,9 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/wdt.h>
+
 #include <stdio.h>
-#include <string.h>
 
 #include "ADC.h"
 #include "PWM.h"

@@ -19,6 +19,9 @@ ISR (ADC_vect)
 	ADMUX ^= 1;
 }
 
+void DIR_bit_ON (uint8_t direction)	{PORTD |= (1<<direction);}
+void DIR_bit_OFF(uint8_t direction)	{PORTD &= ~(1<<direction);}
+
 void ADC_init(void)
 {
     /*
@@ -36,9 +39,81 @@ void ADC_init(void)
 
 	// Mode d'opération free-run [voir datasheet p.216]
 	SFIOR |= (0<<ADTS2)|(0<<ADTS1)|(0<<ADTS0);
+	
+	//Configure port A with pin A4 as an output, others are inputs
+	DDRA |= (1<<PA4);
+	
+	//Configure PORT D with pins 2,3,6,7 as outputs for motor directions control
+	DDRD |= (1<<PD2)|(1<<PD3)|(1<<PD6)|(1<<PD7); 
 }
 
-void ADC_calibration(void)
+void motor_calibration(void)
 {
+	//CAL DIR2 DIR1 PWM Mesure
+	// 1   0    1    0   Vmax+
+	// 0   0    1    0   Vzero+
+	// 0   1    0    0   Vzero-
+	// 1   1    0    0   Vmax-
 	
+	//Les deux PWM doivent être maintenus à zéro pendant la procédure de calibration.
+	PWM_GAUCHE = 0;
+	PWM_DROIT  = 0;
+	
+	//Mesure de Vmax + pour chaque moteur
+	CAL_bit_ON();
+	DIR_bit_OFF(RIGHT_DIR2); DIR_bit_OFF(LEFT_DIR2); 
+	DIR_bit_ON (RIGHT_DIR1); DIR_bit_ON (LEFT_DIR1);
+	
+	resetADC();
+	
+	while(RIGHT_counter < CALIB_SAMPLE_NB && LEFT_counter < CALIB_SAMPLE_NB);
+	
+	RIGHT_Vmax_pos = RIGHT_ADCvalue / RIGHT_counter;
+	LEFT_Vmax_pos  = LEFT_ADCvalue / LEFT_counter;
+	
+	//Mesure de Vzero + pour chaque moteur
+	CAL_bit_OFF();	
+
+	resetADC();
+	
+	while(RIGHT_counter < CALIB_SAMPLE_NB && LEFT_counter < CALIB_SAMPLE_NB);
+		
+	RIGHT_Vzero_pos = RIGHT_ADCvalue / RIGHT_counter;
+	LEFT_Vzero_pos  = LEFT_ADCvalue / LEFT_counter;	
+	
+	//Mesure de Vzero - pour chaque moteur
+	
+	DIR_bit_OFF(RIGHT_DIR1); DIR_bit_OFF(LEFT_DIR1);
+	DIR_bit_ON (RIGHT_DIR2); DIR_bit_ON (LEFT_DIR2);
+	
+	resetADC();
+	
+	while(RIGHT_counter < CALIB_SAMPLE_NB && LEFT_counter < CALIB_SAMPLE_NB);
+	
+	RIGHT_Vzero_neg = RIGHT_ADCvalue / RIGHT_counter;	
+	LEFT_Vzero_neg  = LEFT_ADCvalue / LEFT_counter;	
+	
+	//Mesure de Vmax - pour chaque moteur
+	
+	CAL_bit_ON();
+	
+	resetADC();
+	
+	while(RIGHT_counter < CALIB_SAMPLE_NB && LEFT_counter < CALIB_SAMPLE_NB);
+	
+	RIGHT_Vmax_neg = RIGHT_ADCvalue / RIGHT_counter;
+	LEFT_Vmax_neg  = LEFT_ADCvalue / LEFT_counter;
+	
+	resetADC();
+	CAL_bit_OFF();
+}
+
+void resetADC(void)
+{
+	cli();
+	LEFT_counter   = 0;
+	LEFT_ADCvalue  = 0;
+	RIGHT_counter  = 0;
+	RIGHT_ADCvalue = 0;
+	sei();
 }

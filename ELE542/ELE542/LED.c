@@ -1,5 +1,8 @@
 #include "LED.h"
 
+void LED_ON(uint8_t state)  {PORTB &= ~(1<<state);}
+void LED_OFF(uint8_t state) {PORTB |=  (1<<state);}
+
 void initLED(void)
 {
     /* PORT B as output */
@@ -7,3 +10,5 @@ void initLED(void)
     /* All LED off */
     PORTB = 0xFF;
 }
+
+
