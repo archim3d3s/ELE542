@@ -13,9 +13,9 @@ void initLED(void)
     PORTB = 0xFF;
 }
 
-//void updateLED(uint8_t  )
-//{
-	//
-//}
+void updateLED(uint8_t status)
+{
+	PORTB = ~status;
+}
 
 

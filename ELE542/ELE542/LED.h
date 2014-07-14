@@ -18,8 +18,6 @@ void LED_OFF(uint8_t state);
 	
 /* 		 FUNCTIONS		  */
 void initLED(void);
-
-/* 		   FLAGS		  */
-
+void updateLED(uint8_t status);
 
 #endif

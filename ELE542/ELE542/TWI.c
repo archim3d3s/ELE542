@@ -7,9 +7,6 @@
 
 #include "TWI.h"
 
-
-
-
 //					Fonction
 //No. registre  En lecture		En écriture
 //     0        # de révision	  Commande
@@ -146,7 +143,6 @@ ISR(TWI_vect) {
 			break;
 	}
 }
-
 
 void initTWI(void)
 {

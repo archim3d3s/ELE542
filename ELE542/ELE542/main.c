@@ -27,7 +27,7 @@ int main(void)
 	float speed = 0.0;
 	float angle = 0.0;
 	
-	uint8_t LEDstatus = 0x00;
+	uint8_t LEDstatus = (1<<ATTENTE);
 	
 	uint8_t PINGside = 0;
 	uint8_t sonarLSB = 0;
@@ -55,6 +55,9 @@ int main(void)
 		if (robotState == 0 && SW6)
 		{
 			robotState = 1;
+			
+			LEDstatus |= (1<<ACTIF);
+			LEDstatus &= ~(1<<ATTENTE);
 		}
 		
 		if (robotState == 1)
@@ -62,6 +65,9 @@ int main(void)
 			if (SW7)
 			{
 				robotState = 0;
+				
+				LEDstatus |= (1<<ATTENTE);
+				LEDstatus &= ~(1<<ACTIF);
 			}
 			
 			else
@@ -95,6 +101,9 @@ int main(void)
 					{
 						//PING
 						twiWrite(SONAR_G_W, 0x00, 0x51);
+						
+						LEDstatus |= (1<<PING_SONAR_G);
+						LEDstatus &= ~(1<<PING_SONAR_D);
 						//MESURE
 						twiRead (SONAR_D_R, 0x02, &sonarMSB);
 						twiRead (SONAR_D_R, 0x03, &sonarLSB);
@@ -106,6 +115,9 @@ int main(void)
 					{
 						//PING
 						twiWrite(SONAR_D_W,0x00,0x51);
+						
+						LEDstatus |= (1<<PING_SONAR_D);
+						LEDstatus &= ~(1<<PING_SONAR_G);
 						//MESURE
 						twiRead (SONAR_G_R, 0x02, &sonarMSB);
 						twiRead (SONAR_G_R, 0x03, &sonarLSB);				
@@ -136,6 +148,7 @@ int main(void)
 				if (flag_newStatus)
 				{
 					//Afficher le nouveau statut sur les LED
+					updateLED(LEDstatus);
 				}
 			}
 		}
