@@ -1,3 +1,10 @@
+/*************************************************************************/
+/* Fichier:			 LED.H											 */
+/* Ecrit par:		 Jean-Philippe Cote et Maxim Beauregard				 */
+/* Date de revision: 14/07/2014											 */
+/* Cours:			 ELE542 - Systemes ordines en temps reel			 */
+/*					 Ecole de Technologie Superieure				   	 */
+/*************************************************************************/
 #ifndef LED_H
 #define LED_H
 
@@ -20,4 +27,6 @@ void LED_OFF(uint8_t state);
 void initLED(void);
 void updateLED(uint8_t status);
 
+/*************************************************************************/
 #endif
+/*************************************************************************/

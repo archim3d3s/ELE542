@@ -1,10 +1,10 @@
-/*
- * TWI.c
- *
- * Created: 6/25/2014 4:07:42 PM
- *  Author: JP
- */ 
-
+/*************************************************************************/
+/* Fichier:			 TWI.C												 */
+/* Ecrit par:		 Jean-Philippe Cote et Maxim Beauregard				 */
+/* Date de revision: 14/07/2014											 */
+/* Cours:			 ELE542 - Systemes ordines en temps reel			 */
+/*					 Ecole de Technologie Superieure				   	 */
+/*************************************************************************/
 #include "TWI.h"
 
 //					Fonction
@@ -28,11 +28,6 @@ ISR(TWI_vect) {
 		case	0x08: /* Start Condition */
 		case	0x10: /* Restart Condition */
 			
-			/* 
-				Si  nous avons un start ou un restart condition alors il faut envoyer l'addr 
-				qui est dans le buffer Out et Activer le bus sans start/stop 
-			*/
-			
 			// Load data register with TWI slave address
 			TWDR = getDataOutBuf();
 			// TWI Interrupt enabled and clear flag to send next byte
@@ -43,20 +38,17 @@ ISR(TWI_vect) {
 		case	0x18: /* Address Write Ack */
 		case	0x28: /* Data Write Ack */
 		case	0x30: /* Date Write NoAck */
-			
-			/* 
-				Si  nous avons un data ou une addr d'écrit sur le bus, ensuite il peut y avoir un autre data, 
-				un stop ou un restart. Il faut donc lire le buffer pour savoir quoi faire et configure 
-				le bus en conséquence 
-			*/
 
-			if (TWIdataCounter>0)
+			
+			if (TWIdataCounter>0) /*Si le buffer n'est pas vide*/
 			{
+				/* Nouveau packet*/
 				if(CircularBufferOut[CircularBufferOutIndex+1] >= 0xE0)
 				{
 					//Generate restart condition on the bus to start next transmission
 					TWCR = (1<<TWINT)|(0<<TWEA)|(1<<TWSTA)|(0<<TWSTO)|(0<<TWWC)|(1<<TWEN)|(1<<TWIE);
 				}
+				/*Suite du packet en cours de transmission*/
 				else
 				{
 					//Load TWDR with data byte to send
@@ -65,7 +57,7 @@ ISR(TWI_vect) {
 					TWCR = (1<<TWINT)|(0<<TWEA)|(0<<TWSTA)|(0<<TWSTO)|(0<<TWWC)|(1<<TWEN)|(1<<TWIE);
 				}
 			}
-
+			/*Fin */
 			else
 			{
 				//Generate STOP condition
@@ -78,20 +70,12 @@ ISR(TWI_vect) {
 		case	0x50: /* Data Read Ack */
 		case	0x58: /* Data Read NoAck */
 
-			/* 
-				Une lecture à été effectué sur le bus, il faut donc la récupérer 
-			*/
-			ptr = getDataInBuf();
+			ptr = getDataInBuf(); /*Récupérer la lecture sur le bus*/
 			*ptr = TWDR;
 
 		case	0x40: /* Address Read Ack */
 
-			/* 
-				Puisqu'il n'y a pas de break dans les deux case 0x50 et 0x58, quand nous sommes ici
-				nous avons soit lue la donnée ou envoyé l'addr à lire, il peut donc y avoir un stop, un
-				start ou encore il faut placer le bus en mode lecture 
-			*/
-			if(TWIdataCounter > 0)
+			if(TWIdataCounter > 0) /*Si le buffer n'est pas vide*/
 			{
 				if(CircularBufferOut[CircularBufferOutIndex+1] >= 0xE0)
 				{
@@ -117,13 +101,10 @@ ISR(TWI_vect) {
 		case	0x48: /* Address Read NoAck */
 		case	0x20: /* Address Write NoAck */
 
-			/* 
-				Ici l'un des deux sonars n'a pas répondu, il faut donc tout stoper ou faire un restart
-			    pour la prochaine trame qui peut être dans le buffer 
-			*/	
+
 			while((CircularBufferOut[CircularBufferOutIndex+1] <= 0xE0) && (TWIdataCounter > 0))
 			{
-				getDataOutBuf();
+				getDataOutBuf(); /*Sauter au prochain packet dans le buffer*/
 			}
 			
 			if(TWIdataCounter >0)
@@ -247,3 +228,4 @@ void twiRead(uint8_t address, uint8_t registre, uint8_t *ptr)
 		TWCR = (1<<TWINT)|(0<<TWEA)|(1<<TWSTA)|(0<<TWSTO)|(0<<TWWC)|(1<<TWEN)|(1<<TWIE);
 	}
 }
+/*************************************************************************/

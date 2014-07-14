@@ -1,5 +1,6 @@
 #include "moteur.h"
 
+
 void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G, float *Duty_D)
 {
 
@@ -47,3 +48,4 @@ void CalculPWM(float Vitesse_D, float Angle_D, float Vg, float Vd, float *Duty_G
 	*Duty_D = (*Duty_D > 0.99) ? 0.99 : ((*Duty_D < -0.99) ? -0.99 : *Duty_D);
 	*Duty_G = (*Duty_G > 0.99) ? 0.99 : ((*Duty_G < -0.99) ? -0.99 : *Duty_G);	
 }
+
