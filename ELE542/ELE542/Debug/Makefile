@@ -41,6 +41,7 @@ C_SRCS +=  \
 ../main.c \
 ../moteur.c \
 ../PWM.c \
+../TWI.c \
 ../UART.c
 
 
@@ -56,6 +57,7 @@ LED.o \
 main.o \
 moteur.o \
 PWM.o \
+TWI.o \
 UART.o
 
 OBJS_AS_ARGS +=  \
@@ -64,6 +66,7 @@ LED.o \
 main.o \
 moteur.o \
 PWM.o \
+TWI.o \
 UART.o
 
 C_DEPS +=  \
@@ -72,6 +75,7 @@ LED.d \
 main.d \
 moteur.d \
 PWM.d \
+TWI.d \
 UART.d
 
 C_DEPS_AS_ARGS +=  \
@@ -80,6 +84,7 @@ LED.d \
 main.d \
 moteur.d \
 PWM.d \
+TWI.d \
 UART.d
 
 OUTPUT_FILE_PATH +=ELE542.elf
@@ -93,6 +98,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

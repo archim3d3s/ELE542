@@ -1,5 +1,7 @@
 #include "LED.h"
 
+extern volatile uint8_t flag_newStatus;
+
 void LED_ON(uint8_t state)  {PORTB &= ~(1<<state);}
 void LED_OFF(uint8_t state) {PORTB |=  (1<<state);}
 
@@ -10,5 +12,10 @@ void initLED(void)
     /* All LED off */
     PORTB = 0xFF;
 }
+
+//void updateLED(uint8_t  )
+//{
+	//
+//}
 
 

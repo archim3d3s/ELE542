@@ -1,5 +1,16 @@
 #include "uart.h"
 
+volatile uint8_t flag_CMD_in = 0;
+volatile uint8_t flag_echo_EN = 1;
+volatile uint8_t flag_trans_ON = 0;
+
+volatile uint8_t commande[3] = {0};
+
+/* uart globals */
+static volatile uint8_t *uart_data_ptr;
+static volatile uint8_t uart_out_counter;
+static volatile uint8_t uart_in_counter;
+	
 ISR(USART_TXC_vect)      
 {
 	if (uart_out_counter)
@@ -43,6 +54,7 @@ ISR(USART_RXC_vect)
 	/* Reset counter*/
 	if(uart_in_counter == 3)
 	{
+		flag_CMD_in = 1;
  		uart_in_counter = 0;
 	}
 
@@ -74,6 +86,7 @@ void initUART(void)
 	//- Mode : Interruption
 	//- 8 bits de données 	//- pas de parité	
 	flag_echo_EN = 1;
+	flag_CMD_in = 0;
 	uart_out_counter = 0;
 	uart_in_counter = 0;
     UCSRC = (1<<URSEL)|(0<<UMSEL)|(0<<UPM1)|(0<<UPM0)|(0<<USBS)|(1<<UCSZ1)|(1<<UCSZ0)|(0<<UCPOL);

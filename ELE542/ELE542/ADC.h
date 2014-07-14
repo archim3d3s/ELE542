@@ -27,6 +27,10 @@
 void DIR_bit_ON (uint8_t direction);
 void DIR_bit_OFF(uint8_t direction);
 
+//A2 et A3 permettent de connaitre le signe de la vitesse
+#define DIR_G (PORTA & (1<<PA2))
+#define DIR_D (PORTA & (1<<PA3))
+
 /* ADC globals */
 static volatile uint8_t 	LEFT_counter   = 0;
 static volatile uint16_t	LEFT_ADCvalue  = 0;
@@ -39,7 +43,7 @@ static volatile uint16_t	RIGHT_ADCvalue = 0;
 static volatile uint16_t	RIGHT_Vmax_pos = 0xFFFF;
 static volatile uint16_t	RIGHT_Vzero_pos = 0x0000;
 static volatile uint16_t	RIGHT_Vmax_neg = 0xFFFF;
-static volatile uint16_t	RIGHT_zero_neg = 0x0000;
+static volatile uint16_t	RIGHT_Vzero_neg = 0x0000;
 //Left
 static volatile uint16_t	LEFT_Vmax_pos = 0xFFFF;
 static volatile uint16_t	LEFT_Vzero_pos = 0x0000;
@@ -49,5 +53,6 @@ static volatile uint16_t	LEFT_Vzero_neg = 0x0000;
 void ADC_init(void);
 void motor_calibration(void);
 void resetADC(void);
+void getADCmeanValues(float* right, float* left);
 
 #endif

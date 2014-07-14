@@ -41,7 +41,7 @@ void ADC_init(void)
 	SFIOR |= (0<<ADTS2)|(0<<ADTS1)|(0<<ADTS0);
 	
 	//Configure port A with pin A4 as an output, others are inputs
-	DDRA |= (1<<PA4);
+	DDRA = (1<<PA4);
 	
 	//Configure PORT D with pins 2,3,6,7 as outputs for motor directions control
 	DDRD |= (1<<PD2)|(1<<PD3)|(1<<PD6)|(1<<PD7); 
@@ -116,4 +116,25 @@ void resetADC(void)
 	RIGHT_counter  = 0;
 	RIGHT_ADCvalue = 0;
 	sei();
+}
+
+void getADCmeanValues(float* right, float* left)
+{
+	if(DIR_D)
+	{
+		*right = -((float)RIGHT_ADCvalue/(float)RIGHT_counter)/(float)(RIGHT_Vmax_neg-RIGHT_Vzero_neg);
+	}
+	else
+	{
+		*right = ((float)RIGHT_ADCvalue/(float)RIGHT_counter)/(float)(RIGHT_Vmax_pos-RIGHT_Vzero_pos);
+	}
+	
+	if(DIR_G)
+	{
+		*left = -((float)LEFT_ADCvalue/(float)LEFT_counter)/(float)(LEFT_Vmax_neg-LEFT_Vzero_neg);
+	}
+	else
+	{
+		*left = ((float)LEFT_ADCvalue/(float)LEFT_counter)/(float)(LEFT_Vmax_pos-LEFT_Vzero_pos);
+	}	
 }

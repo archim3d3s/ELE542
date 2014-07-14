@@ -1,5 +1,10 @@
 #include "PWM.h"
 
+volatile uint8_t flag_PWMcycle = 0;
+volatile uint8_t flag_50ms_TICK = 0;
+
+static volatile uint8_t TICK_counter = 0;
+
 ISR(TIMER1_OVF_vect)
 {	
 	flag_PWMcycle = 1;

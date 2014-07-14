@@ -20,6 +20,6 @@ void LED_OFF(uint8_t state);
 void initLED(void);
 
 /* 		   FLAGS		  */
-static volatile uint8_t flag_newStatus;
+
 
 #endif
